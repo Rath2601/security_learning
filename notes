@@ -1,0 +1,76 @@
+common
+filters --> DisableEncodeUrlFilter, 
+            WebAsyncManagerIntegrationFilter,
+            SecurityContextHolderFilter,
+            HeaderWriterFilter, 
+            CorsFilter, 
+            CsrfFilter, 
+            LogoutFilter, 
+            UsernamePasswordAuthenticationFilter,
+            DefaultLoginPageGeneratingFilter, 
+            DefaultLogoutPageGeneratingFilter, 
+            BasicAuthenticationFilter, 
+            RequestCacheAwareFilter, 
+            SecurityContextHolderAwareRequestFilter,
+            AnonymousAuthenticationFilter, 
+            ExceptionTranslationFilter, 
+            AuthorizationFilter
+
+common
+authentication
+manager  ---->    ProviderManager (most used)
+                  NoOpAuthenticationManager
+                  ObservationAuthenticationManager
+
+Authentication
+type classes -->  AbstractAuthenticationToken (sub class)
+                       --> AnonymousAuthenticationToken
+                           RememberMeAuthenticationToken
+                           TestingAuthenticationToken
+                           UsernamePasswordAuthenticationToken
+                           PreAuthenticatedAuthenticationToken
+
+common 
+Authentication
+provider     -->  AbstractUserDetailsAuthenticationProvider
+                        --> DaoAuthenticationProvider
+                  AnonymousAuthenticationProvider
+                  RememberMeAuthenticationProvider
+                  TestingAuthenticationProvider
+                  PreAuthenticatedAuthenticationProvider
+
+UserDetailsService (I)  --> UserDetailsManager (I) --> InMemoryUserDetailsManager
+                                                       JdbcUserDetailsManager
+                                                       LdapUserDetailsManager
+
+i) We'll use user object in UserDetailsService type and Authentication object in filter, Authentication provider , Authentication manager & store it in SecurityContextHolder.
+
+
+WAYS OF PASSWORD MANAGEMENT : 
+   1.Encoding     --> reversible without any secret/ key
+   2.Encryption   --> reversible wih a secret key
+   3.Hashing      --> non reversible (most secure method)
+
+When multiple users use the same password, hashing alone is not enough to ensure the security of their accounts. 
+This is because hash values tend to be a fixed length, typically 256 or 512 bits, and there are more possible passwords than there are possible hash values.
+As a result, some passwords must hash to the same value, making it possible for an attacker to compromise multiple accounts with the same password.
+
+The Role of Salting
+
+To prevent this, a technique called salting is used. Salting adds random characters to each password when the user enters it,
+resulting in completely different hashes for the same password. This makes it virtually impossible for an attacker to determine the original password, 
+even if they have a list of hash values.
+
+How Salting Works
+
+When a user creates an account, a unique salt value is generated and stored along with the hashed password.
+When the user logs in, the salt value is retrieved and used to hash the entered password. 
+The resulting hash value is then compared to the stored hash value. If they match, the user is authenticated.
+
+Benefits of Salting
+
+Salting provides several benefits:
+
+Prevents rainbow table attacks: Salts make it impossible for attackers to pre-compute hash values for common passwords, as the salt value is unique to each account.
+Prevents dictionary attacks: Salts make it difficult for attackers to use precomputed lists of hash values to crack passwords.
+Ensures unique hash values: Salts ensure that even if multiple users use the same password, their hash values will be different, making it impossible for an attacker to determine the original password.
