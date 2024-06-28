@@ -33,7 +33,7 @@ type classes -->  AbstractAuthenticationToken (sub class)
 common 
 Authentication
 provider     -->  AbstractUserDetailsAuthenticationProvider
-                        --> DaoAuthenticationProvider
+                        --> DaoAuthenticationProvider (default)
                   AnonymousAuthenticationProvider
                   RememberMeAuthenticationProvider
                   TestingAuthenticationProvider
@@ -74,3 +74,16 @@ Salting provides several benefits:
 Prevents rainbow table attacks: Salts make it impossible for attackers to pre-compute hash values for common passwords, as the salt value is unique to each account.
 Prevents dictionary attacks: Salts make it difficult for attackers to use precomputed lists of hash values to crack passwords.
 Ensures unique hash values: Salts ensure that even if multiple users use the same password, their hash values will be different, making it impossible for an attacker to determine the original password.
+
+
+**Custom authentication provider**:
+
+1.If we use default authenticationProvider --> only to load data from DB , password comparison , other account related function.
+
+    we may need own authentication logic. so we need our own AuthenticationProvider.
+
+2. We can have multiple authentication provider. 
+    In scenario, like req1 : username & password.
+                      req2 : OAuth2
+                      req3 : OTP 
+    In each scenario we need diff Authentication provider.
