@@ -92,3 +92,15 @@ Ensures unique hash values: Salts ensure that even if multiple users use the sam
    It's authenticate method will be called inside uthenticate method of ProviderManager.
 
    AuthenticationFilter --> ProviderManager (authenticate method) --> AbstractUserDetailsAuthenticationProvider (authenticate method)/DaoAuthenticationProvider
+
+
+**CORS & CSRF** :
+
+CORS: security mechanism for integrating applications.
+      enables browser client interaction with resource from other origin.
+      different origin in term of different scheme (http/ https) , different port and different domain.
+
+possible options to fix CORS block:
+    1. @CrossOrigin(origins="http://localhost:4200") in controller class which will be checked during pre-flight request. 
+       not possible for multiple controllers (i.e may be more than 100)
+    2. CORS configuration globally like security configuration class.
