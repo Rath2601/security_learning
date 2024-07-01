@@ -87,3 +87,8 @@ Ensures unique hash values: Salts ensure that even if multiple users use the sam
                       req2 : OAuth2
                       req3 : OTP 
     In each scenario we need diff Authentication provider.
+
+3. Our custom AuthenticationProvider falls between (Filters , Manager) &  (UserDetailsService , PasswordEncoder).
+   It's authenticate method will be called inside uthenticate method of ProviderManager.
+
+   AuthenticationFilter --> ProviderManager (authenticate method) --> AbstractUserDetailsAuthenticationProvider (authenticate method)/DaoAuthenticationProvider
