@@ -104,3 +104,12 @@ possible options to fix CORS block:
     1. @CrossOrigin(origins="http://localhost:4200") in controller class which will be checked during pre-flight request. 
        not possible for multiple controllers (i.e may be more than 100)
     2. CORS configuration globally like security configuration class.
+
+CSRF: attack that forces an end user to execute unwanted actions on a web app with social engineering.
+
+possible options to fix CSRF attack:
+    1. Generate a CSRF token while login and return it in cookie. But before that in UI code 
+       pass it as header or payload for upcoming requests.
+       The hacker may not know in which form we're passing the CSRF token, he can use only automatic style of sending
+       request to the web app as the CSRF token in cookie.
+
