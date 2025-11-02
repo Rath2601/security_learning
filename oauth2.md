@@ -33,7 +33,7 @@ It adds **ID Token**, **UserInfo endpoint**, and **standard scopes** for authent
 | Grant Type | Interaction | Tokens | Use Case |
 |-------------|-------------|---------|-----------|
 | **Authorization Code** | User → Browser → Server | access + refresh | Web app login |
-| **Authorization Code + PKCE** | User → Mobile App | access + refresh | Native mobile SSO |
+| **Authorization Code + PKCE** | User → Mobile App(primarily) | access + refresh | Native mobile SSO |
 | **Implicit** | User → Browser | access only | Legacy SPA |
 | **Client Credentials** | Server → Server | access only | M2M / Microservices |
 | **Resource Owner Password (deprecated)** | User credentials directly sent | access only | Not recommended |
