@@ -1,13 +1,7 @@
-# Threat Modeling (STRIDE) & OWASP Top 10 — Interview Prep Notes
-
-> **Audience:** Developer prepping for a security-focused interview.
-> **Angle:** Written as a senior security architect would frame it — know the *mnemonic*, the *property it protects*, and *one concrete control* for each item. Interviewers care more about "can you reason about a threat and mitigate it" than rote memorization.
-
+## Threat Modeling (STRIDE) & OWASP Top 10 — Interview Prep Notes
 ---
-
-## Part 1 — STRIDE Threat Modeling
-
-**What it is (one line):** A Microsoft-originated mnemonic for classifying threats; you walk each element of a system (processes, data stores, data flows, external entities) and ask "which of these six can happen here?"
+### Threat Modeling (STRIDE)
+**What it is :** A Microsoft-originated mnemonic for classifying threats; you walk each element of a system (processes, data stores, data flows, external entities) and ask "which of these six can happen here?"
 
 **Each STRIDE threat is the violation of a specific security property** — that mapping is the part interviewers probe.
 
@@ -20,7 +14,7 @@
 | **D** — Denial of Service | Attacker exhausts resources so legitimate users can't use the system. | Availability | Apply rate limiting, throttling, quotas, autoscaling, and upstream DDoS protection. |
 | **E** — Elevation of Privilege | Attacker gains rights beyond what they're authorized to have. | Authorization | Enforce least privilege, server-side authorization checks, and validate all inputs. |
 
-### How to actually run a threat model (say this if asked "walk me through it")
+#### How to actually run a threat model (say this if asked "walk me through it") (Re-verify at https://owasp.org/Top10/ ) 
 1. **Scope & diagram** — draw a Data Flow Diagram (DFD); mark **trust boundaries** (where data crosses privilege levels — the highest-value places to look).
 2. **Enumerate** — apply STRIDE to each element on the diagram.
 3. **Mitigate** — pick a control for each credible threat (see table above).
@@ -29,14 +23,8 @@
 > **Bonus points:** mention **DREAD** (Damage, Reproducibility, Exploitability, Affected users, Discoverability) as a lightweight way to *prioritize* the threats STRIDE surfaces, and note that threat modeling should happen at **design time**, not after code ships.
 
 ---
-
-## Part 2 — OWASP Top 10:2025
-
-**⚠️ This list changes (~every 4 years). Always check the official source before an interview:**
-- **Official (bookmark this):** https://owasp.org/Top10/2025/
-- **Project home / all versions:** https://github.com/OWASP/Top10
-
-**What it is (one line):** A consensus list of the ten most critical web application security risks, based on real-world CVE/CWE data and practitioner surveys — increasingly organized around *root causes* rather than symptoms.
+### OWASP Top 10 (2025) (**⚠️ This list changes (~every 4 years). Always check the official source before an interview:**)
+**What it is :** A consensus list of the ten most critical web application security risks, based on real-world CVE/CWE (Common Vulnerabilities and Exposures/Common Weakness Enumeration)  data and practitioner surveys, increasingly organized around *root causes* rather than symptoms.
 
 | # | Category | What it is (one line) | Prevention (one line) |
 |---|---|---|---|
@@ -60,14 +48,8 @@
 - Broader theme: continued shift from **symptoms** to **root causes** (Injection is now the only remaining "symptom" category).
 
 ---
-
-## Part 3 — Tying It Together (the answer that impresses)
-
+### Tying It Together
 - **STRIDE is the *lens*; OWASP is the *checklist*.** STRIDE helps you *discover* threats against your specific design; the OWASP Top 10 is the *industry baseline* of what commonly goes wrong.
 - They overlap cleanly — e.g. STRIDE *Elevation of Privilege* ↔ OWASP *A01 Broken Access Control*; *Tampering* ↔ *A08 Integrity Failures*; *Information Disclosure* ↔ *A04 Cryptographic Failures*.
-- **#1 has been Broken Access Control for years** — a safe, correct thing to state, ideally with one concrete example (e.g. an IDOR where changing `/account/123` to `/account/124` leaks another user's data) and its fix (server-side ownership checks).
 - **Shift security left:** the cheapest bug to fix is the one caught in design (threat modeling) or CI (SAST/dependency scanning), not in production.
-
 ---
-
-*Notes reflect the OWASP Top 10:2025 (final release, Jan 2026). Re-verify at https://owasp.org/Top10/ before your interview in case a newer edition has shipped.*
