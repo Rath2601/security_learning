@@ -25,6 +25,7 @@ Layered controls, so one failure doesn't mean a breach. The assumption is that *
 `Physical (locks, badges)` → `Network (firewalls, segmentation, IDS/IPS)` → `Host (EDR, patching, hardening)` → `Application (input validation, WAF)` → `Data (encryption, DLP)` → `Identity (MFA, conditional access)`
 
 **How it's used:** an attacker who phishes a password still hits **MFA**; if they clear that, **network segmentation** limits lateral movement; if they reach a server, **least privilege caps** what they can touch. No layer is trusted to be sufficient alone.
+
 ---
 ### Principle of Least Privilege (PoLP)
 Every user, process, and service gets the **minimum** access needed to do its job — and nothing more.
