@@ -64,6 +64,6 @@ This is why implementation is organization-specific:
 | Organization | Weights most heavily | Why |
 |---|---|---|
 | Hospital | Availability + Confidentiality | Patient data + life-critical systems |
-| Bank | Integrity | Transactions must be exact |
+| Bank | Integrity + Confidentiality | Transactions must be exact |
 
 **Same principles, different emphasis and tooling.**
